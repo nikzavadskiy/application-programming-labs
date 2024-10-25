@@ -33,7 +33,7 @@ def split_to_names (text:str)->list:
     
 
 def define_count(names: list, human_name:str) -> None:
-    print(text.count(human_name))
+    print(names.count(human_name))
     
 
 def main():
