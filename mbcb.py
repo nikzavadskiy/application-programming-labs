@@ -22,7 +22,7 @@ def read(file_name: str) -> str:
         with open(file_name, "r", encoding="utf-8") as file:
             text = file.read()
         return text
-    except file_not_found as erorr_reading:
+    except FileNotFoundError as erorr_reading:
         raise file_not_found(f"Ошибка: файл с именем '{file_name}'  не найден : {erorr_reading}")
 
 
@@ -44,7 +44,7 @@ def main():
         txt = read(arguments.file_name)
         names = split_to_names(txt)
         define_count(names, arguments.human_name)
-    except exception as erorr:
+    except Exception as erorr:
         print(f"Произошла ошибка: {erorr}")
 
 if __name__ == "__main__":
