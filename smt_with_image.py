@@ -41,6 +41,14 @@ def rotation(image :np.ndarray,angle:int)-> np.ndarray:
             'center' точка в серединке картинки, чтобы вокруг нее вращать
             'rotation_matrix' матрица, ктр используется для поворота
         """
-        rotated = cv2.warpAffine(image, rotation_matrix, (w, h), flags=cv2.INTER_LINEAR, borderMode=cv2.BORDER_REFLECT)
+        cos = abs(rotation_matrix[0,0])
+        sin = abs(rotation_matrix[0,1])
+        new_w = int((h*sin)+(w*cos))
+        new_h = int((h*cos)+(w*sin))
+
+        rotation_matrix[0,2] += (new_w/2) - center[0]
+        rotation_matrix[1,2] += (new_h/2) - center[1]
+        
+        rotated = cv2.warpAffine(image, rotation_matrix, (new_w, new_h), flags=cv2.INTER_LINEAR, borderMode=cv2.BORDER_REFLECT, borderValue(0,0,0))
         return rotated
 
