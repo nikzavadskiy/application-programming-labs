@@ -36,11 +36,11 @@ def rotation(image :np.ndarray,angle:int)-> np.ndarray:
         """
         (h, w) = image.shape[:2]
         center = (int(w/2),int(h/2))
-        rotation_matrix = cv2.getRotationMatrix2D(center,angle, 0.5)
+        rotation_matrix = cv2.getRotationMatrix2D(center,angle,1.0)
         """
             'center' точка в серединке картинки, чтобы вокруг нее вращать
             'rotation_matrix' матрица, ктр используется для поворота
         """
-        rotated = cv2.warpAffine(image, rotation_matrix, (w, h))
+        rotated = cv2.warpAffine(image, rotation_matrix, (w, h), flags=cv2.INTER_LINEAR, borderMode=cv2.BORDER_REFLECT)
         return rotated
 
